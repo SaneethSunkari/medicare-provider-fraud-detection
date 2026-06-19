@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Databricks
+.databricks/
+databricks.yml
+.bundle/
+dbfs/
+*.dbc
+
+# MLflow and model artifacts
+mlruns/
+mlartifacts/
+models/
+artifacts/
+*.pkl
+*.joblib
+
+# Data files
+*.csv
+*.tsv
+*.json
+*.jsonl
+*.parquet
+*.delta
+*.db
+*.sqlite
+
+# Logs and temp files
+*.log
+tmp/
+temp/
+.DS_Store
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Secrets and environment files
+.env
+.env.*
+*.pem
+*.key
+*.token
