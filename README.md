@@ -265,7 +265,7 @@ git remote add origin <repo_url>
 git push -u origin main
 ```
 
-## Portfolio Highlights
+## Data Bricks and Data Quality
 
 This project is designed to demonstrate skills relevant to Data Engineer and ML Engineer roles:
 
