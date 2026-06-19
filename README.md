@@ -27,6 +27,17 @@ The project uses a Bronze → Silver → Gold Lakehouse design in Databricks:
 - **ML:** Random Forest classifiers are trained using provider fraud features, tracked in MLflow, and selected by ROC AUC.
 - **MLOps:** The best model is registered in Databricks Model Registry with a `champion` alias and used by batch scoring and serving workflows.
 - **GenAI:** Provider risk context is written to `provider_fraud_ai_input` so analysts can test LLM explanations in Databricks Playground and explore AI application patterns with Databricks Agents.
+  
+## Key Results:
+
+- **Built an end-to-end Databricks Lakehouse solution using Bronze, Silver, and Gold layers.
+- **Engineered provider-level fraud indicators from Medicare claims and beneficiary datasets.
+- **Trained and evaluated Random Forest fraud detection models using MLflow.
+- **Achieved ROC-AUC of 0.93 on provider fraud classification.
+- **Registered and governed production models using Databricks Model Registry.
+- **Deployed fraud scoring workflows using Databricks Model Serving.
+- **Generated analyst-ready fraud predictions and risk categories.
+- **Enabled GenAI-powered fraud investigation workflows using Databricks Playground and Agents.
 
 ## Architecture
 
@@ -61,6 +72,90 @@ flowchart LR
 - Databricks SQL for analyst queries
 - Databricks Playground for LLM workflow testing
 - Databricks Agents / AI application exploration
+
+## Data Quality and Governance
+
+- Data quality is one of the key factors considered when designing this platform. It is treated as a foundational pillar of data governance and is integrated throughout the Lakehouse architecture rather than being implemented as a final validation step.
+
+- The platform follows the principle that trustworthy machine learning and analytics depend on trustworthy data. Data quality controls are therefore applied before feature engineering, model training, batch scoring, and downstream AI workflows.
+
+## Data Quality Strategy
+
+- The solution incorporates a dedicated Data Quality Framework implemented through:
+
+- **Schema validation
+- **Null-value monitoring
+- **Duplicate detection
+- **Business rule validation
+- **Range checks
+- **Ratio validation
+- **Quarantine processing
+- **Data quality metrics reporting
+
+## Data Quality Checks Implemented
+
+### Completeness
+
+Ensures required fields are populated.
+
+Examples:
+
+* Provider cannot be null.
+* Fraud labels cannot be missing.
+* Reimbursement metrics must be available.
+
+### Uniqueness
+
+Ensures provider records are unique.
+
+Examples:
+
+* Duplicate Provider detection.
+* Primary key validation.
+
+### Validity
+
+Ensures data follows business rules.
+
+Examples:
+
+* Total claims must be non-negative.
+* Reimbursement amounts must be non-negative.
+* Fraud probability must be between 0 and 1.
+
+### Consistency
+
+Ensures feature values remain logically correct.
+
+Examples:
+
+* Ratio features stay within expected ranges.
+* Provider-level aggregations remain consistent.
+
+### Monitoring
+
+Data quality metrics are tracked and monitored through:
+
+* `medicare_catalog.quality.data_quality_metrics`
+* `medicare_catalog.quality.dq_dashboard_summary`
+
+Invalid records are isolated in:
+
+* `medicare_catalog.quality.quarantine_provider_fraud_predictions`
+
+This prevents poor-quality data from impacting analytics, machine learning models, and AI applications.
+
+## Why Data Quality Matters
+
+Machine learning models are only as good as the data they learn from. Poor-quality data can lead to inaccurate predictions and reduced trust in results.
+
+By implementing data quality controls before training and scoring, the platform ensures:
+
+* Reliable fraud risk predictions
+* Consistent and reproducible results
+* Higher confidence for investigators
+* Better governance and auditability
+* Enterprise-ready data pipelines
 
 ## Repository Structure
 
